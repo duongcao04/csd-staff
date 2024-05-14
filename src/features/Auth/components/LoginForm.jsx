@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch } from 'react-redux';
 
 import yup from '@/utils/yupServices';
-import userApi from '@/api/userApi';
+import authApi from '@/api/authApi';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 
 function LoginForm() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const schema = yup.object().shape({
 		email: yup.string().required('Required').email('Email invalid'),
 		password: yup.string().required('Required').password('Password invalid'),
@@ -23,16 +26,10 @@ function LoginForm() {
 	});
 
 	const onSubmitHandler = async (data) => {
-		try {
-			const user = await userApi.loginUser({
-				email: data.email,
-				password: data.password,
-			})
-			localStorage.setItem('user', JSON.stringify(user.data));
-			window.location.replace("/");
-		} catch (error) {
-			alert(error.response.data);
-		}
+		await authApi.loginUser({
+			email: data.email,
+			password: data.password,
+		}, dispatch, navigate)
 	};
 
 	return (

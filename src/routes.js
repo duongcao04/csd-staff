@@ -6,10 +6,13 @@ import ProjectsPage from '@/pages/ProjectsPage';
 import TeamPage from '@/pages/TeamPage';
 import MarketingPage from '@/pages/MarketingPage';
 import HumanResoucePage from '@/pages/HumanResoucePage';
+//User
+import AccountInformationPage from '@/features/User/pages/AccountInformationPage';
 // Auth
 import LoginPage from '@/features/Auth/pages/LoginPage';
 // Layout
 import HomeLayout from '@/components/layouts/HomeLayout';
+import AuthLayout from '@/components/layouts/AuthLayout';
 
 // Routing configuration
 const routes = [
@@ -17,6 +20,11 @@ const routes = [
 		path: '/',
 		component: HomePage,
 		layout: HomeLayout
+	},
+	{
+		path: '/account',
+		component: AccountInformationPage,
+		layout: AuthLayout
 	},
 	{
 		path: '/login',
