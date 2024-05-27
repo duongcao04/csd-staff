@@ -8,7 +8,7 @@ function UserDropdown() {
 	return (
 		<div className='absolute bg-[#313b71] rounded-md min-w-[280px] shadow-2xl top-[52px] right-0 p-4'>
 			<div className='rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-1'>
-				<Link to={'/account'} className='rounded-md flex items-center justify-start gap-3 cursor-pointer hover:bg-[#232a52] p-2' title='Account Information'>
+				<Link to={'/auth/account'} className='rounded-md flex items-center justify-start gap-3 cursor-pointer hover:bg-[#232a52] p-2' title='Account Information'>
 					<img
 						src={user?.information.avatar}
 						alt='user-avatar'

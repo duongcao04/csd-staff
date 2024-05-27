@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 
 GuestGuard.propTypes = {
     children: PropTypes.node,
 };
 
-function GuestGuard({children}) {
+function GuestGuard({ children }) {
     return (
-        {children}
+        <React.Fragment>{children}</React.Fragment>
     );
 }
 

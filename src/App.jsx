@@ -1,6 +1,7 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from '@/routes';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
+import GuestGuard from '@/components/layouts/guards/GuestGuard';
 
 function App() {
     return (
@@ -10,14 +11,41 @@ function App() {
                     if (!route.children) {
                         const Page = route.component;
                         const Layout = route.layout ?? DefaultLayout;
-                        return <Route key={index} path={route.path} element={<Layout><Page/></Layout>}/>
+                        const Guard = route.guard ?? GuestGuard;
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Guard>
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    </Guard>
+                                }
+                            />
+                        );
                     } else {
-                        route?.children.map((routeChild, idx) => {
-                            const Path = routeChild.path;
+                        return route?.children.map((routeChild, idx) => {
+                            const GuardChild = routeChild.guard ?? route.guard ?? GuestGuard;
+                            const PathChild = route.path + routeChild.path;
                             const PageChild = routeChild.component;
-                            const LayoutChild = routeChild.layout ?? DefaultLayout;
-                            return <Route key={idx} path={Path} element={<LayoutChild><PageChild/></LayoutChild>}/>
-                        })
+                            const LayoutChild =
+                                routeChild.layout ?? DefaultLayout;
+                            return (
+                                <Route
+                                    key={idx}
+                                    path={PathChild}
+                                    element={
+                                        <GuardChild>
+                                            <LayoutChild>
+                                                <PageChild />
+                                            </LayoutChild>
+                                        </GuardChild>
+                                    }
+                                />
+                            );
+                        });
                     }
                 })}
             </Routes>

@@ -1,4 +1,4 @@
-import { loginFailed, loginStart, loginSuccess } from '@/redux/authSlice';
+import { loginFailed, loginStart, loginSuccess } from '@/redux/auth';
 import axiosClient from './axiosClient';
 
 const authApi = {
@@ -12,6 +12,7 @@ const authApi = {
 		try {
 			const res = await axiosClient.post(url, user);
 			dispatch(loginSuccess(res.data.elements));
+			localStorage.setItem('user',JSON.stringify(res.data.elements))
 			navigate('/');
 		} catch (error) {
 			dispatch(loginFailed())

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import useAuth from "@/hooks/useAuth.jsx";
-import SignIn from "@/features/Auth/pages/SignIn.jsx";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 AuthGuard
     .propTypes = {
@@ -8,16 +9,15 @@ AuthGuard
 };
 
 function AuthGuard({children}) {
-    const {isAuthenticated} = useAuth();
+    const currentUser = useAuth();
+    console.log(currentUser);
 
-    if (!isAuthenticated) {
-        return <SignIn/>
+    if (!currentUser) {
+        return <Navigate to='/auth/login'/>
     }
 
     return (
-        {
-            children
-        }
+        <React.Fragment>{ children }</React.Fragment>
     );
 }
 
