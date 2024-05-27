@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LogoCSD from '/public/logo.webp';
 import LoginForm from '@/features/Auth/components/LoginForm';
 
-function LoginPage() {
+function SignIn() {
 	return (
 		<React.Fragment>
 			<div className='bg-gradient-to-r from-[#f3f3c3] to-[#D4D3DD] w-full h-full grid place-items-center'>
@@ -31,4 +31,4 @@ function LoginPage() {
 	);
 }
 
-export default LoginPage;
+export default SignIn;
