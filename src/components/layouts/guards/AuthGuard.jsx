@@ -8,16 +8,15 @@ AuthGuard
     children: PropTypes.node,
 };
 
-function AuthGuard({children}) {
+function AuthGuard({ children }) {
     const currentUser = useAuth();
-    console.log(currentUser);
 
     if (!currentUser) {
-        return <Navigate to='/auth/login'/>
+        return <Navigate to='/auth/login' />
     }
 
     return (
-        <React.Fragment>{ children }</React.Fragment>
+        <React.Fragment>{children}</React.Fragment>
     );
 }
 

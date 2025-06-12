@@ -14,8 +14,9 @@ import SignIn from '@/features/Auth/pages/SignIn.jsx';
 import HomeLayout from '@/components/layouts/HomeLayout';
 import WithHeaderLayout from '@/components/layouts/WithHeaderLayout';
 //Guards
-import AuthGuard from '@/components/layouts/guards/AuthGuard';
+// import AuthGuard from '@/components/layouts/guards/AuthGuard';
 import NotFound from '@/pages/404NotFound';
+import GuestGuard from './components/layouts/guards/GuestGuard';
 
 // Routing configuration
 const routes = [
@@ -23,7 +24,8 @@ const routes = [
         path: '/',
         component: HomePage,
         layout: HomeLayout,
-        guard: AuthGuard,
+        // TODO: Auth Guard
+        guard: GuestGuard,
     },
     {
         path: '/auth',
@@ -36,21 +38,23 @@ const routes = [
                 path: '/account',
                 component: AccountInformationPage,
                 layout: WithHeaderLayout,
-                guard: AuthGuard,
+                // TODO: Auth Guard
+                guard: GuestGuard,
             }
         ]
     },
     {
-        path:'/dashboard',
-        guard: AuthGuard,
+        path: '/dashboard',
+        // TODO: Auth Guard
+        guard: GuestGuard,
         children: [
-            {path: '/activities', component: ActivitiesPage, layout: HomeLayout},
-            {path: '/finance', component: FinancePage, layout: HomeLayout},
-            {path: '/documents', component: DocumentsPage, layout: HomeLayout},
-            {path: '/projects', component: ProjectsPage, layout: HomeLayout},
-            {path: '/team', component: TeamPage, layout: HomeLayout},
-            {path: '/marketing', component: MarketingPage, layout: HomeLayout},
-            {path: '/human-resource', component: HumanResoucePage, layout: HomeLayout},
+            { path: '/activities', component: ActivitiesPage, layout: HomeLayout },
+            { path: '/finance', component: FinancePage, layout: HomeLayout },
+            { path: '/documents', component: DocumentsPage, layout: HomeLayout },
+            { path: '/projects', component: ProjectsPage, layout: HomeLayout },
+            { path: '/team', component: TeamPage, layout: HomeLayout },
+            { path: '/marketing', component: MarketingPage, layout: HomeLayout },
+            { path: '/human-resource', component: HumanResoucePage, layout: HomeLayout },
         ]
     },
     {
